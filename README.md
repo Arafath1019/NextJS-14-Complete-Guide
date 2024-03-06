@@ -3,7 +3,12 @@
 ### Official Website of NextJS
 https://nextjs.org/
 
-### Installation
+### NextJS Installation
 ```
 $ npx create-next-app@latest
+```
+
+### Create React Project Using Vite
+```
+$ npm create vite@latest
 ```
