@@ -21,9 +21,14 @@ function PostsList({ isPosting, onStopPosting }) {
           />
         </Modal>
       )}
-      <ul className={classes.posts}>
-        <Post author="asdasda" body="asdasd" />
-      </ul>
+      {posts.length > 0 &&   <ul className={classes.posts}>
+        {posts.map((post, index) => <Post key={index}  author={post.author} body={post.body} />)}
+      </ul>}
+      {posts.length == 0 && <div style={{ textAlign: 'center', color: 'white'}}>
+        <h1>There are no posts yet!</h1>
+        <p>Start adding some!</p>
+        </div>}
+    
     </>
   );
 }
