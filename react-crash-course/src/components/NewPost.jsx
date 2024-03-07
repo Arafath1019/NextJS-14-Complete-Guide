@@ -1,24 +1,18 @@
-import classes from './NewPost.module.css';
-import {useState} from 'react';
+import classes from "./NewPost.module.css";
 
-function NewPost() {
-    const [enteredBody, setEnteredBody] = useState('');
-    const changeBodyHandler = (event) => {
-        setEnteredBody(event.target.value);
-    }
+function NewPost(props) {
   return (
     <form className={classes.form}>
-        <p>
-            <label htmlFor="body">Text</label>
-            <textarea id="body" required rows={3} onChange={changeBodyHandler} />
-        </p>
-        <p>{enteredBody}</p>
-        <p>
-            <label htmlFor="name">Your Name</label>
-            <input id="name" type="text" required />
-        </p>
+      <p>
+        <label htmlFor="body">Text</label>
+        <textarea id="body" required rows={3} onChange={props.onBodyChange} />
+      </p>
+      <p>
+        <label htmlFor="name">Your Name</label>
+        <input id="name" type="text" required onChange={props.onAuthorChange} />
+      </p>
     </form>
-  )
+  );
 }
 
-export default NewPost
+export default NewPost;
