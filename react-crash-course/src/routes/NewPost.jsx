@@ -1,54 +1,41 @@
 import Modal from "../components/Modal";
 import classes from "./NewPost.module.css";
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Form, redirect } from "react-router-dom";
 
-function NewPost({ onAddPost }) {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEneteredAuthor] = useState("");
-
-  const changeBodyHandler = (event) => {
-    setEnteredBody(event.target.value);
-  };
-
-  const changeAuthorHandler = (event) => {
-    setEneteredAuthor(event.target.value);
-  };
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    const postData = {
-      author: enteredAuthor,
-      body: enteredBody,
-    };
-    onAddPost(postData);
-    onCancel();
-  };
+function NewPost() {
   return (
     <Modal>
-      <form className={classes.form} onSubmit={submitHandler}>
+      <Form method="post" className={classes.form}>
         <p>
           <label htmlFor="body">Text</label>
-          <textarea id="body" required rows={3} onChange={changeBodyHandler} />
+          <textarea id="body" name="body" required rows={3} />
         </p>
         <p>
           <label htmlFor="name">Your Name</label>
-          <input
-            id="name"
-            type="text"
-            required
-            onChange={changeAuthorHandler}
-          />
+          <input id="name" type="text" required name="author" />
         </p>
         <p className={classes.actions}>
-          <Link to=".." type="button" >
+          <Link to=".." type="button">
             Cancel
           </Link>
           <button>Submit</button>
         </p>
-      </form>
+      </Form>
     </Modal>
   );
 }
 
 export default NewPost;
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const postData = Object.fromEntries(formData);
+  await fetch("http://localhost:8080/posts", {
+    method: "POST",
+    body: JSON.stringify(postData),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  return redirect("/");
+}
