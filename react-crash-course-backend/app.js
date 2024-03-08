@@ -20,7 +20,10 @@ app.get("/posts", async (req, res) => {
     res.status(200).json({ message: 'Fetched all posts', posts: allPosts});
 });
 
-app.get("/posts/:id", (req, res) => {});
+app.get("/posts/:id", (req, res) => {
+    const post = allPosts.find((post) => post.id === req.params.id)
+    res.json({ post })
+});
 
 app.post("/posts", (req, res) => {
   const postData = req.body;
