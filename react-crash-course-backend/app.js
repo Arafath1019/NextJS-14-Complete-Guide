@@ -17,7 +17,6 @@ app.use((req, res, next) => {
 });
 
 app.get("/posts", async (req, res) => {
-    await new Promise((resolve, reject) => setTimeout(() => resolve(), 1500)); // Only for investigating slow server purpose
     res.status(200).json({ message: 'Fetched all posts', posts: allPosts});
 });
 
