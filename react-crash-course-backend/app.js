@@ -16,7 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/posts", async (req, res) => {});
+app.get("/posts", async (req, res) => {
+    res.status(200).json({ message: 'Fetched all posts', posts: allPosts});
+});
 
 app.get("/posts/:id", (req, res) => {});
 
