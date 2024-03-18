@@ -12,3 +12,9 @@ $ npx create-next-app@latest
 ```
 $ npm create vite@latest
 ```
+
+### Building & Running a NextJS Project for Production
+```
+$ npm run build
+$ npm start
+```
